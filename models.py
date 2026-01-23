@@ -12,7 +12,7 @@ def build_tf_model(config):
     if model_name == "mobilenetv3":
         if config["dataset"]["preprocess"]:
             model = tf.keras.applications.MobileNetV3Small(
-                input_shape=(config["dataset"]["FREQ_BINS"], config["dataset"]["HOP_LENGTH"]+1, in_channels),
+                input_shape=(config["dataset"]["FREQ_BINS"], config["dataset"]["HOP_LENGTH"], in_channels),
                 include_preprocessing=False,
                 include_top=True,
                 classes=num_classes,
@@ -33,6 +33,11 @@ def build_tf_model(config):
     elif model_name == "resnet18":
         model = ResNet(config = config, classes=num_classes)
         
+    elif "mcunet" in model_name:
+        # MCUNet conversion is complex and will be handled separately.
+        # For now, returning a placeholder.
+        print(f"MCUNet model ({model_name}) conversion is not yet implemented.")
+        return None
     else:
         raise ValueError(f"Unknown model name: {model_name}")
     

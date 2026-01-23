@@ -260,12 +260,15 @@ def relu(x):
 def hard_sigmoid(x):
     return layers.ReLU(6.)(x + 3.) * (1. / 6.)
 
+# def hard_swish(x):
+#     return layers.Multiply()([layers.Activation(hard_sigmoid)(x), x])
+    
+
+# keras_utils.get_custom_objects().update({'hard_swish': layers.Activation(hard_swish)})
+
 @register_keras_serializable(package="Custom", name="hard_swish")
 def hard_swish(x):
     return x * tf.nn.relu6(x + 3) / 6.0
-
-from keras.utils import get_custom_objects
-get_custom_objects()["hard_swish"] = hard_swish
 
 def _depth(v, divisor=8, min_value=None):
     if min_value is None:
@@ -465,7 +468,7 @@ def MobileNetV3(stack_fn,
         se_ratio = None
     else:
         kernel = 5
-        activation = hard_swish
+        activation = layers.Activation(hard_swish)
         se_ratio = 0.25
     
     reshaped_input = layers.Reshape((1,config["dataset"]["sample_rate"],1), name='reshape_input')(img_input)

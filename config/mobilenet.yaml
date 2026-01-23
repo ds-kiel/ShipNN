@@ -1,27 +1,27 @@
-gpu_id: '<gpu_id>' # GPU id to use. Use -1 for CPU.
+gpu_id: '0' # GPU id to use. Use -1 for CPU.
 workers: 8
 
 seed: 42
-output_dir: '<output_dir_path>' # Path to the folder where outputs will be saved.
+output_dir: 'your_output_folder' # Path to the folder where outputs will be saved.
 resume: null # Checkpoint path
 
 wandb:
-  log: True # Whether to log the model to wandb.
+  log: False # Whether to log the model to wandb.
   # If True, then set the following parameters.
-  key: '<wandb key>' # Your wandb key.
-  project: '<project name>'
-  run_name: '<run_name>'
+  key: 'your_wandb_key_here' # Your wandb key.
+  project: 'ShipNN'
+  run_name: 'ShipNN_test_run'
   id: null
   tags: null
 
 model:
-  name: '<model_name>' # Type of the model. Options are ["resnet18", "mobilenetv3"].
+  name: 'mobilenetv3' # Type of the model. Options are ["cnn","lstm","resnet18", "mobilenetv3"].
   width: 0.25
   num_classes: 100 # Number of predicted classes.
 
 hyperparameters:
   dropout: 0.2
-  epochs: 1
+  epochs: 500
   learning_rate: 0.0005
 
 dataset:
@@ -31,7 +31,7 @@ dataset:
   batch_size: 32
   sample_rate: 16000 # Sample rate of the wav file.
   num_samples: 1
-  preprocess: ["cqt","mfcc"] # preprocessing type. Options are ["cqt","mfcc","gamma"]. or [] for raw audio.
+  preprocess: ["cqt","mfcc"] # preprocessing type. Options are ["mfcc", "cqt", "gamma"]. or [] for raw audio.
   FREQ_BINS : 95 # This number was based on the CQT, which have 95 freq bins for 4186hz
   HOP_LENGTH : 125 # Used to generate an output of 128 on x axis
   N_FFT : 16000 # This value is UNUSED because of the freq bins is mandatory

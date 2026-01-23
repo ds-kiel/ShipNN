@@ -7,7 +7,7 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 from models import build_tf_model
 from sklearn import model_selection
 from wandb.integration.keras import WandbMetricsLogger, WandbModelCheckpoint
-from dataset.tf_data_loader import get_datasets, create_tf_dataset
+from dataset.data_loader import get_datasets, create_tf_dataset
 import numpy as np
 import tensorflow as tf
 from sklearn.metrics import precision_score, recall_score

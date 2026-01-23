@@ -2,7 +2,7 @@ gpu_id: '0' # GPU id to use. Use -1 for CPU.
 workers: 8
 
 seed: 42
-output_dir: 'your_output_folder' # Path to the folder where outputs will be saved.
+output_dir: '/home/mal/ship_paper/ShipNN/outputs' # Path to the folder where outputs will be saved.
 resume: null # Checkpoint path
 
 wandb:
@@ -21,19 +21,19 @@ model:
 
 hyperparameters:
   dropout: 0.2
-  epochs: 500
+  epochs: 1
   learning_rate: 0.0005
 
 dataset:
-  augment: True
+  augment: False
   augmentation_type: 'noise'
-  root_dir: '<data_dir_path>' # Path to the dataset folder.
+  root_dir: '/data22/datasets/ships_datasets/VTUAD/' # Path to the dataset folder.
   batch_size: 32
   sample_rate: 16000 # Sample rate of the wav file.
   num_samples: 1
   preprocess: ["cqt","mfcc"] # preprocessing type. Options are ["mfcc", "cqt", "gamma"]. or [] for raw audio.
   FREQ_BINS : 95 # This number was based on the CQT, which have 95 freq bins for 4186hz
-  HOP_LENGTH : 125 # Used to generate an output of 128 on x axis
+  HOP_LENGTH : 126 # Used to generate an output of 128 on x axis
   N_FFT : 16000 # This value is UNUSED because of the freq bins is mandatory
   FMAX : 4186 # Correspond to a C8 note (Most High on a piano) (empirical)
   FMIN : 18.0 # Minimun accepted value on CQT for audios of 1s

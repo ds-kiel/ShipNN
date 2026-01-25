@@ -25,7 +25,7 @@ The repository includes:
 The focus is on **lightweight CNN architectures** suitable for **on-device inference**, enabling deployment on embedded platforms such as microcontrollers and low-power edge devices.
 
 <p align="center">
-    <img src="figures/ShipNN_arcitecture.jpg" width="80%">
+    <img src="figures/ShipNN_architecture.jpg" width="80%">
 </p>
 
 ---

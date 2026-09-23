@@ -2,39 +2,38 @@ gpu_id: '0' # GPU id to use. Use -1 for CPU.
 workers: 8
 
 seed: 42
-output_dir: '/home/mal/ship_paper/ShipNN/outputs' # Path to the folder where outputs will be saved.
-resume: null # Checkpoint path
+output_dir: 'output_dir_path' # Path to the folder where outputs will be saved.
+resume: null # Checkpoint path, provide it only if you want to resume training from a checkpoint.
 
 wandb:
-  log: False # Whether to log the model to wandb.
+  log: False # Whether to log to wandb.
   # If True, then set the following parameters.
-  key: 'your_wandb_key_here' # Your wandb key.
+  key: 'your_wandb_key_here'
   project: 'ShipNN'
   run_name: 'ShipNN_test_run'
   id: null
   tags: null
 
 model:
-  name: 'mobilenetv3' # Type of the model. Options are ["cnn","lstm","resnet18", "mobilenetv3"].
+  name: 'mobilenetv3'
   width: 0.25
   num_classes: 100 # Number of predicted classes.
 
 hyperparameters:
-  dropout: 0.2
   epochs: 1
   learning_rate: 0.0005
 
 dataset:
+  root_dir: 'dataset_path'
   augment: False
   augmentation_type: 'noise'
-  root_dir: '/data22/datasets/ships_datasets/VTUAD/' # Path to the dataset folder.
   batch_size: 32
-  sample_rate: 16000 # Sample rate of the wav file.
+  sample_rate: 16000
   num_samples: 1
   preprocess: ["cqt","mfcc"] # preprocessing type. Options are ["mfcc", "cqt", "gamma"]. or [] for raw audio.
-  FREQ_BINS : 95 # This number was based on the CQT, which have 95 freq bins for 4186hz
-  HOP_LENGTH : 126 # Used to generate an output of 128 on x axis
-  N_FFT : 16000 # This value is UNUSED because of the freq bins is mandatory
-  FMAX : 4186 # Correspond to a C8 note (Most High on a piano) (empirical)
-  FMIN : 18.0 # Minimun accepted value on CQT for audios of 1s
+  FREQ_BINS : 95
+  HOP_LENGTH : 256
+  N_FFT : 16000
+  FMAX : 4186
+  FMIN : 18.0
   N_MFCC : 13
